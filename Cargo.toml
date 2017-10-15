@@ -1,0 +1,13 @@
+[package]
+name = "tinyrs"
+version = "0.1.0"
+authors = ["Amy Colford <amy.colford@greenfieldlabs.ca>"]
+
+[dependencies]
+ws="*"
+iron="*"
+staticfile="*"
+mount="*"
+router="*"
+logger="*"
+env_logger="*"

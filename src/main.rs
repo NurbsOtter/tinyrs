@@ -5,6 +5,7 @@ extern crate mount;
 extern crate staticfile;
 extern crate logger;
 extern crate env_logger;
+extern crate rand;
 extern crate ws;
 fn main() {
 	env_logger::init().unwrap();

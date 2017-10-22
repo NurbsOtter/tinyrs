@@ -9,7 +9,7 @@ pub fn new(){
 	let gamestate = Arc::new(Mutex::new(gamestate::new()));
 	thread::spawn(move ||{
 		let mut rng = rand::thread_rng();
-		let err = listen("127.0.0.1:3012",|out|{
+		let err = listen("0.0.0.0:3012",|out|{
 			let client = client::new(rng.gen::<u64>(), out.clone(),gamestate.clone());
 			let mutex = gamestate.clone();
 			let mut gs = mutex.lock().unwrap();

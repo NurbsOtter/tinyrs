@@ -13,12 +13,17 @@ impl GameState {
 	pub fn register(&mut self,sender: Sender,id: u64){
 		self.clients.insert(id,sender);
 	}
-	pub fn sendAll(&mut self, message: String){
+	pub fn deregister(&mut self, id: u64){
+		self.clients.remove(&id);
+	}
+	pub fn sendAll(&mut self, message: String,id: u64){
 		for (key,_) in &self.clients{
-			match self.clients.get(&key){
-				Some(c)=>{c.send(message.clone());},
-				None=>println!("aaaa"),
-			};
+			if *key != id{
+				match self.clients.get(&key){
+					Some(c)=>{c.send(message.clone());},
+					None=>println!("aaaa"),
+				};
+			}
 		}
 	}
 }

@@ -19,6 +19,9 @@ impl Handler for Client {
 			CloseCode::Away => println!("Client {}: Left the site.", self.id),
 			_=>println!("Unhandled error: {}", reason),
 		}
+		let mutex = self.gamestate.clone();
+		let mut gs = mutex.lock().unwrap();
+		gs.deregister(self.id);
 	}
 	fn on_message(&mut self, message: Message) -> Result<()>{
 		let mutex = self.gamestate.clone();
@@ -27,7 +30,7 @@ impl Handler for Client {
 			Ok(s)=>s,
 			_=>panic!("aaaaa"),
 		};
-		gs.sendAll(text);
+		gs.sendAll(text,self.id);
 		self.out.send(message.clone())
 	}
 }
